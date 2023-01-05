@@ -28,24 +28,59 @@ class InputsScreen extends StatelessWidget {
                 key: myFormaKey,
                 child: Column(
                   children: [
-                    const CustomInputField(
-                        labelText: 'Nombre', hintText: 'Nombre del usuario'),
+                    CustomInputField(
+                      labelText: 'Nombre',
+                      hintText: 'Nombre del usuario',
+                      formProperty: 'first_name',
+                      formValues: formValues,
+                    ),
                     const SizedBox(height: 30),
-                    const CustomInputField(
-                        labelText: 'Apellido',
-                        hintText: 'Apellido del usuario'),
+                    CustomInputField(
+                      labelText: 'Apellido',
+                      hintText: 'Apellido del usuario',
+                      formProperty: 'last_name',
+                      formValues: formValues,
+                    ),
                     const SizedBox(height: 30),
-                    const CustomInputField(
-                        labelText: 'Correo',
-                        hintText: 'Correo del usuario',
-                        keyboardType: TextInputType.emailAddress),
+                    CustomInputField(
+                      labelText: 'Correo',
+                      hintText: 'Correo del usuario',
+                      keyboardType: TextInputType.emailAddress,
+                      formProperty: 'email',
+                      formValues: formValues,
+                    ),
                     const SizedBox(height: 30),
-                    const CustomInputField(
+                    CustomInputField(
                       labelText: 'Contraseña',
                       hintText: 'Contraseña',
                       obscureText: true,
+                      formProperty: 'password',
+                      formValues: formValues,
                     ),
                     const SizedBox(height: 30),
+                    DropdownButtonFormField<String>(
+                        items: const [
+                          DropdownMenuItem(
+                            value: 'Admins',
+                            child: Text('Admin'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'SuperUser',
+                            child: Text('SuperUser'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Developer',
+                            child: Text('Developer'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Jr. Developer',
+                            child: Text('Jr. Developer'),
+                          ),
+                        ],
+                        onChanged: (value) {
+                          print(value);
+                          formValues['role'] = value ?? 'Admin';
+                        }),
                     ElevatedButton(
                       child: const SizedBox(
                           width: double.infinity,
